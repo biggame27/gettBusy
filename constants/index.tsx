@@ -6,6 +6,11 @@ export const sidebarStuff = [
     icon: <IoHome />
   },
   {
+    name: 'To Do List',
+    link: '/todo',
+    icon: <IoHome />
+  },
+  {
     name: 'Calendar',
     link: '/calendar',
     icon: <IoHome />

@@ -14,3 +14,22 @@ declare type UpdateUserParams = {
   username: string;
   photo: string;
 };
+
+declare type CreateTaskParams = {
+  taskId: string,
+  clerkId: string;
+  name: string;
+  date: Number;
+  month: Number;
+  year: Number;
+  recurring: Boolean;
+}
+
+
+declare type UpdateTaskParams = {
+  name: string;
+  date: Number;
+  month: Number;
+  year: Number;
+  recurring: Boolean;
+};
