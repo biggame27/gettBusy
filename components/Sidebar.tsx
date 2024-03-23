@@ -26,7 +26,7 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="ml-4 mb-4">
-          <UserButton />  
+          <UserButton afterSignOutUrl='/' />  
         </div>
         </SignedIn>
         <SignedOut>
