@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import Task from "../database/models/task.model";
 import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
+import User from "../database/models/user.model";
+import { getUserById } from "./user.actions";
 
 // CREATE
 export async function createTask(task: CreateTaskParams) {
@@ -22,8 +24,14 @@ export async function createTask(task: CreateTaskParams) {
 export async function getTasks(clerkId: string, month: Number, year: Number) {
   try {
     await connectToDatabase();
-    
+    const id = await getUserById(clerkId);
+    const author = await User.findById(id);
+
+    if (!author) {
+      throw new Error("user not found");
+    }
     const monthTasks = await Task.find({ "clerkId": clerkId, "month": month, "year": year });
+    console.log(monthTasks);
     return JSON.parse(JSON.stringify(monthTasks));
   } catch(error) {
     handleError(error);

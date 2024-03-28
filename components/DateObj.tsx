@@ -18,7 +18,7 @@ const DateObj: React.FC<DateObjProps> = ({ value, isCurrentMonth, isSelected}) =
   }
 
   return (
-      <div className= {`flex flex-col h-36 ${isCurrentMonth ? 'dark:text-gray-700' : 'dark:text-gray-400 overflow-y-auto'}`} >
+      <div className= {`flex flex-col h-36 ${isCurrentMonth ? 'text-gray-700' : 'text-gray-400'}`} >
         <div className="flex flex-col">
           <div className="flex items-center justify-between">
             <div className="inline-flex items-center gap-x-2">
@@ -29,15 +29,16 @@ const DateObj: React.FC<DateObjProps> = ({ value, isCurrentMonth, isSelected}) =
             <AiOutlinePlus 
               size={20} 
               onClick={onClick}
-              className="
+              className={`
                 text-neutral-400 
                 cursor-pointer 
-                hover:text-white 
+                hover:opacity-50 
                 transition
-              "
+                ${isCurrentMonth ? 'text-gray-700' : 'text-gray-400'}
+              `}
             />
           </div>
-          <div className="flex flex-col gap-y-2 mt-4 px-3">
+          <div className="flex flex-col gap-y-2 mt-4 px-3 overflow-y-auto">
             {events.map((event, index) => (
               <p key={index}>{event}</p>
             ))}

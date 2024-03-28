@@ -10,9 +10,8 @@ const dummyTasks = [
 
 export default function Home() {
   return (
-    <div className="flex flex-row text-textColor mt-4 ml-4">
-      <Sidebar />
-      <div className="flex flex-col items-center p-8  justify-center w-screen ">
+    <div className="flex flex-row text-textColor mt-4 ml-4 h-full">
+      <div className="flex flex-col items-center p-8  justify-center w-full">
       <h1 className="text-3xl font-bold mb-8">welcome to your productivity app!</h1>
       <div className="grid grid-cols-3 gap-4">
         {dummyTasks.map(task => (
