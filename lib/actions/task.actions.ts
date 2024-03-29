@@ -30,7 +30,12 @@ export async function getTasks(clerkId: string, month: Number, year: Number) {
     if (!author) {
       throw new Error("user not found");
     }
-    const monthTasks = await Task.find({ "clerkId": clerkId, "month": month, "year": year });
+    let monthTasks;
+    if (month == 0 && year == 0){
+      monthTasks = await Task.find({ "clerkId": clerkId });
+    }else {
+      monthTasks = await Task.find({ "clerkId": clerkId, "month": month, "year": year });
+    }
     console.log(monthTasks);
     return JSON.parse(JSON.stringify(monthTasks));
   } catch(error) {
@@ -62,14 +67,14 @@ export async function deleteTask(taskId: string) {
     await connectToDatabase();
 
     // Find task to delete
-    const taskToDelete = await Task.findOne({ taskId });
+    // const taskToDelete = await Task.findOne({ taskId });
 
-    if (!taskToDelete) {
-      throw new Error("User not found");
-    }
+    // if (!taskToDelete) {
+    //   throw new Error("User not found");
+    // }
 
     // Delete task
-    const deletedTask = await Task.findByIdAndDelete(taskToDelete._id);
+    const deletedTask = await Task.findByIdAndDelete(taskId);
     revalidatePath("/");
 
     return deletedTask ? JSON.parse(JSON.stringify(deletedTask)) : null;

@@ -1,5 +1,6 @@
 "use server"
-import { createTask, getTasks } from "@/lib/actions/task.actions";
+import { createTask, deleteTask, getTasks } from "@/lib/actions/task.actions";
+import { handleError } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
@@ -45,5 +46,12 @@ export async function getTask2 (month: Number, year: Number) {
   } catch (error) {
     console.log('bruh1')
   }
-  
+}
+
+export async function deleteTask2 (taskId: string) {
+  try {
+    await deleteTask(taskId);
+  } catch(error) {
+    handleError(error);
+  }
 }
