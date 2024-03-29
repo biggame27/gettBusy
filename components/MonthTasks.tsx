@@ -8,7 +8,7 @@ import { deleteTask } from "@/lib/actions/task.actions";
 import { useRouter } from "next/navigation";
 
 
-const MonthTasks = ({month, year, tasks} : {month: Number, year: Number, tasks:[]}) => {
+const MonthTasks = ({month, year, tasks} : {month: Number, year: Number, tasks:any}) => {
 
   const router = useRouter();
 
