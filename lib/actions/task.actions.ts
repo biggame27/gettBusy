@@ -32,11 +32,10 @@ export async function getTasks(clerkId: string, month: Number, year: Number) {
     }
     let monthTasks;
     if (month == 0 && year == 0){
-      monthTasks = await Task.find({ "clerkId": clerkId });
+      monthTasks = await Task.find({ "clerkId": clerkId }).sort({year: 1, month: 1, day: 1});
     }else {
-      monthTasks = await Task.find({ "clerkId": clerkId, "month": month, "year": year });
+      monthTasks = await Task.find({ "clerkId": clerkId, "month": month, "year": year }).sort({year: 1, month: 1, day: 1});
     }
-    console.log(monthTasks);
     return JSON.parse(JSON.stringify(monthTasks));
   } catch(error) {
     handleError(error);

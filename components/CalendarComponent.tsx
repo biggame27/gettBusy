@@ -3,8 +3,8 @@ import DateObj from '@/components/DateObj';
 import { Button } from '@/components/ui/button';
 import React, { useState } from 'react';
 
-const CalendarComponent = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
+const CalendarComponent = ({tasks} : {tasks:any}) => {
+  const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const [changeableYear, setChangeableYear] = useState(year);

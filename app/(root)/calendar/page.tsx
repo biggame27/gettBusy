@@ -11,7 +11,7 @@ const Calendar = async () => {
 
   return (
     <div className="flex flex-row gap-4">
-      <CalendarComponent />
+      <CalendarComponent tasks={tasks} />
       <div className="flex flex-col">
         <MonthTasks month={month} year={year} tasks={tasks} />
         <TaskForm />
