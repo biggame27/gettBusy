@@ -24,59 +24,22 @@ const CalendarComponent = ({tasks} : {tasks:any}) => {
     let days = [];
     let dayCounter = 1;
     let daysAfter = 1;
-
-    let taskThing = [];
-    // somehow gotta check for year swaps
-    for (let i = 0; i < tasks.length; i++)
-      if  ((tasks[i].year == changeableYear && Math.abs(changeableMonth-tasks[i].month) <= 1) || (tasks[i].year < changeableYear && tasks[i].month == 11 && changeableMonth == 0) ||
-      (tasks[i].year > changeableYear && tasks[i].month == 0 && changeableMonth == 11))
-        taskThing.push(tasks[i]);
-    let cnt = 0;
     for (let i = 0; i < numRows; i++) {
       let row = [];
       for (let j = 0; j < 7; j++) {
         if ((i === 0 && j < firstDayOfWeek)) {
           const dateRender = lastDayOfLastMonth.getDate()-firstDayOfWeek+j+1;
-          let stuffToRender = []
-          // check for december and jan edge cases
-          if (changeableMonth == 0) {
-            while (cnt < taskThing.length && taskThing[cnt].year < changeableYear && taskThing[cnt].date < dateRender-j)
-              cnt++;
-            while (cnt < taskThing.length && taskThing[cnt].year < changeableYear && taskThing[cnt].date == dateRender){
-              stuffToRender.push(taskThing[cnt])
-              cnt++;
-            }
-          } else {
-            while (cnt < taskThing.length && taskThing[cnt].month < changeableMonth && taskThing[cnt].date < dateRender-j){
-              cnt++;
-            }
-            while (cnt < taskThing.length && taskThing[cnt].month == changeableMonth-1 && taskThing[cnt].date == dateRender) {
-              stuffToRender.push(taskThing[cnt])
-              cnt++;
-            }
-          }
-          row.push(<DateObj key={`${i}-${j}`} value={dateRender} isCurrentMonth={false} isSelected={false} render={stuffToRender} />)
+          const oneMonthBefore = new Date(changeableYear, changeableMonth-1, dateRender);
+          row.push(<DateObj value={dateRender} isCurrentMonth={false} isSelected={false} tasks={tasks} date={oneMonthBefore} />)
 
         } else if (dayCounter > lastDateOfMonth) {
-          let stuffToRender = []
-          // another check for december and jan :///
-          
-          while (cnt < taskThing.length && ((taskThing[cnt].month == changeableMonth+1 && taskThing[cnt].date == daysAfter) || 
-          (taskThing[cnt].year == changeableYear+1 && taskThing[cnt].month == 0 && taskThing[cnt].date == daysAfter))){
-            stuffToRender.push(taskThing[cnt])
-            cnt++;
-          }
-          row.push(<DateObj key={`${i}-${j}`} value={daysAfter} isCurrentMonth={false} isSelected={false} render={stuffToRender}/>);
+          const oneMonthAfter = new Date(changeableYear, changeableMonth+1, daysAfter);
+          row.push(<DateObj value={daysAfter} isCurrentMonth={false} isSelected={false} tasks={tasks} date={oneMonthAfter} />);
           daysAfter++;
+          
         }
         else {
-          let stuffToRender = []
-          while (cnt < taskThing.length && taskThing[cnt].month == changeableMonth && taskThing[cnt].date == dayCounter) {
-            stuffToRender.push(taskThing[cnt])
-            cnt++;
-          }
-
-          row.push(<DateObj key={`${i}-${j}`} value={dayCounter} isCurrentMonth={true} isSelected={false} render={stuffToRender} />)
+          row.push(<DateObj value={dayCounter} isCurrentMonth={true} isSelected={false} tasks={tasks} date={new Date(changeableYear, changeableMonth, dayCounter)} />)
           dayCounter++;
         }
       }

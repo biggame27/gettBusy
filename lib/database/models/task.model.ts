@@ -14,13 +14,7 @@ const TaskSchema = new Schema({
     type: String,
   }, 
   date: {
-    type: Number,
-  },
-  month: {
-    type: Number,
-  },
-  year: {
-    type: Number,
+    type: Date,
   },
   recurring: {
     type: Boolean,

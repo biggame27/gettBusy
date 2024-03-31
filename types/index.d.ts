@@ -19,9 +19,7 @@ declare type CreateTaskParams = {
   taskId: string,
   clerkId: string;
   name: string;
-  date: Number;
-  month: Number;
-  year: Number;
+  date: Date;
   recurring: Boolean;
 }
 

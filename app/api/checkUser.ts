@@ -10,7 +10,7 @@ export async function checkUser() {
   return userId;
 }
 
-export async function sendTask(name: string, day: Number, month: Number, year: Number) {
+export async function sendTask(name: string, date: Date) {
   try {
 
     // console.log(String(userId));
@@ -26,9 +26,8 @@ export async function sendTask(name: string, day: Number, month: Number, year: N
       taskId: String(Date.now()),
       clerkId: await checkUser(),
       name: name,
-      date: day,
-      month: month,
-      year: year,
+      // actual date object
+      date: date,
       recurring: false,
     }
     console.log(task)

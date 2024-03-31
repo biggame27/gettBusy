@@ -14,11 +14,6 @@ type FormFields = {
 }
 
 const TaskForm = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const year1 = currentDate.getFullYear();
-  const month1 = currentDate.getMonth();
-  const date1 = currentDate.getDay();
-
   // register is fields, handleSubmit makes it to where page doesn't refresh
   const { register, handleSubmit } = useForm<FormFields>();
 
@@ -26,7 +21,8 @@ const TaskForm = () => {
   const [isPending, startTransition] = useTransition();
 
   const onSubmit: SubmitHandler<FormFields> = (data:any) => {
-    sendTask(String(data.name), Number(data.day), Number(data.month), Number(data.year))
+    const date = new Date(data.year, data.month, data.day);
+    sendTask(String(data.name), date)
     startTransition(() => {
       // Refresh the current route and fetch new data from the server without
       // losing client-side browser or React state.

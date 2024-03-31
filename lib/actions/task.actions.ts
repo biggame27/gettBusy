@@ -20,7 +20,7 @@ export async function createTask(task: CreateTaskParams) {
     handleError(error);
   }
 }
-
+//FIX
 export async function getTasks(clerkId: string, month: Number, year: Number) {
   try {
     await connectToDatabase();
@@ -32,7 +32,7 @@ export async function getTasks(clerkId: string, month: Number, year: Number) {
     }
     let monthTasks;
     if (month == 0 && year == 0){
-      monthTasks = await Task.find({ "clerkId": clerkId }).sort({year: 1, month: 1, day: 1});
+      monthTasks = await Task.find({ "clerkId": clerkId }).sort({date: 1});
     }else {
       monthTasks = await Task.find({ "clerkId": clerkId, "month": month, "year": year }).sort({year: 1, month: 1, day: 1});
     }

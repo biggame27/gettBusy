@@ -9,7 +9,7 @@ const ToDo = async () => {
   const tasks = await getTask2(0,0);
   return (
     <div className="flex flex-col">
-      <MonthTasks month={month} year={year} tasks={tasks} />
+      <MonthTasks tasks={tasks} />
       <TaskForm />
       
     </div>

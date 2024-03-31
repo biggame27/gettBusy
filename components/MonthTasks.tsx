@@ -7,8 +7,29 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { deleteTask } from "@/lib/actions/task.actions";
 import { useRouter } from "next/navigation";
 
+const taskRender = (task: any) => {
+  const date = new Date(task.date);
+  return (
+    <div className="flex flex-row justify-center items-center">
+      <p className="w-36 overflow-hidden border-r border-t">
+      {task.name}
+      </p>
+      <p className="w-12 overflow-hidden border-r border-t">
+      {date.getDate()}
+      </p>
+      <p className="w-12 overflow-hidden border-r border-t">
+      {date.getMonth()+1}
+      </p>
+      <p className="w-12 overflow-hidden border-t">
+      {date.getFullYear()}
+      </p>
+    </div>
+  )
+    
+}
 
-const MonthTasks = ({month, year, tasks} : {month: Number, year: Number, tasks:any}) => {
+
+const MonthTasks = ({tasks} : {tasks:any}) => {
 
   const router = useRouter();
 
@@ -18,25 +39,13 @@ const MonthTasks = ({month, year, tasks} : {month: Number, year: Number, tasks:a
     router.refresh();
 
   }
-
   return (
     <div>
       
       {tasks &&  tasks.map((task : any) => (
         // onSubmit={(event) => handleSubmit(event, task._id)}
         <form key={task._id} className="flex flex-row justify-center items-center" onSubmit={(event) => handleSubmit(event, task._id)} >
-          <p className="w-36 overflow-hidden border-r border-t">
-          {task.name}
-          </p>
-          <p className="w-12 overflow-hidden border-r border-t">
-          {task.month+1}
-          </p>
-          <p className="w-12 overflow-hidden border-r border-t">
-          {task.date}
-          </p>
-          <p className="w-12 overflow-hidden border-t">
-          {task.year}
-          </p>
+          {taskRender(task)}
           <Button type="submit"  variant="outline" size="icon" className="bg-red-500 hover:bg-red-600 h-5/6">
             <TiDeleteOutline size={28} />
           </Button>
