@@ -24,7 +24,7 @@ const DateObj: React.FC<DateObjProps> = ({ value, isCurrentMonth, isSelected, ta
   for (let i = 0; i < tasks.length; i++)
   {
     const taskDate = new Date(tasks[i].date)
-    if (taskDate.getFullYear() == date.getFullYear() && taskDate.getMonth() == date.getMonth() && taskDate.getDate() == date.getDate())
+    if (taskDate.getFullYear() == date.getFullYear() && taskDate.getMonth()-1 == date.getMonth() && taskDate.getDate() == date.getDate())
       toRender.push(tasks[i]);
   }
 

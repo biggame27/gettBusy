@@ -6,6 +6,7 @@ import { TiDelete } from "react-icons/ti";
 import { TiDeleteOutline } from "react-icons/ti";
 import { deleteTask } from "@/lib/actions/task.actions";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const taskRender = (task: any) => {
   const date = new Date(task.date);
@@ -14,15 +15,10 @@ const taskRender = (task: any) => {
       <p className="w-36 overflow-hidden border-r border-t">
       {task.name}
       </p>
-      <p className="w-12 overflow-hidden border-r border-t">
-      {date.getDate()}
-      </p>
-      <p className="w-12 overflow-hidden border-r border-t">
-      {date.getMonth()+1}
-      </p>
-      <p className="w-12 overflow-hidden border-t">
-      {date.getFullYear()}
-      </p>
+      <Button className="w-36 flex justify-center overflow-hidden border-r border-t">
+      {date.getMonth()}/{date.getDate()}/{date.getFullYear()}
+      </Button>
+      
     </div>
   )
     
